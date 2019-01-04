@@ -5,25 +5,46 @@ def generateWord():
 	return 'word'
 
 def summonWords():
+
 	words.append(generateWord())
+	times.append(5)
 	print(words)
+	print(times)
 	while gameState == True:
-		time.sleep(2) # num seconds interval between new words appearing
+
+		# passage of time and events that occur per second
+		time.sleep(1)
+		countTime()
+		time.sleep(1) # num seconds interval between new words appearing
+		countTime()
+
 		words.append(generateWord())
+		times.append(5)
 		print(words)
+		print(times)
 
 def typeAnswers():
-	global gameState
+
 	while gameState == True:
 		answer = input()
 
 		for i in range(0, 1):
 			if answer == words[i]:
-				words.remove(answer)
+				words.remove(words[i])
+				times.remove(times[i])
 				print(words)
-				if(len(words) == 0):
-					gameState = False
-				break;
+				print(times)
+
+def countTime(): # Another thread?
+
+	global gameState
+	for i in range(0, len(times)):
+		times[i] -= 1
+		if times[i] == 0:
+			gameState = False
+			print('Game Over! Enter anything to end and see score: ')
+			
+
 
 # game
 def playGame():
@@ -39,9 +60,11 @@ def playGame():
 	threadWords.join()
 	threadAnswers.join()
 
-	print('Game Over!')
+	print('Score: ' +str(score))
 
 words = []
+times = []
+
 gameState = True
 
 playGame()
