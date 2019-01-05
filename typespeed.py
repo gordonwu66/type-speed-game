@@ -28,10 +28,10 @@ def typeAnswers():
 	while gameState == True:
 		answer = input()
 
-		for i in range(0, 1):
-			if answer == words[i]:
-				words.remove(words[i])
-				times.remove(times[i])
+		if len(words) > 0:
+			if answer == words[0]:
+				words.remove(words[0])
+				times.remove(times[0])
 				print(words)
 				print(times)
 
