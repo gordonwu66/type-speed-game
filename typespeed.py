@@ -1,8 +1,18 @@
-import time, threading
+import time, threading, random
 
 def generateWord():
 
-	return 'word'
+	rand = random.Random()
+	num = rand.randint(1, 4)
+	
+	if num == 1: 
+		return 'word'
+	elif num == 2:
+		return 'hello'
+	elif num == 3:
+		return 'hi'
+	elif num == 4:
+		return 'python'
 
 def summonWords():
 
@@ -23,7 +33,8 @@ def summonWords():
 		print(words)
 		print(times)
 
-def typeAnswers():
+def typeAnswers(wordPoints):
+	score = 0
 
 	while gameState == True:
 		answer = input()
@@ -34,6 +45,9 @@ def typeAnswers():
 				times.remove(times[0])
 				print(words)
 				print(times)
+				score += wordPoints
+
+	print('Score: ' +str(score))
 
 def countTime(): # Another thread?
 
@@ -49,18 +63,16 @@ def countTime(): # Another thread?
 # game
 def playGame():
 	# data
-	score = 0
+	wordPoints = 100
 	
 	threadWords = threading.Thread(target = summonWords)
-	threadAnswers = threading.Thread(target = typeAnswers)
+	threadAnswers = threading.Thread(target = typeAnswers, args = [wordPoints])
 		
 	threadWords.start()
 	threadAnswers.start()
 
 	threadWords.join()
 	threadAnswers.join()
-
-	print('Score: ' +str(score))
 
 words = []
 times = []
