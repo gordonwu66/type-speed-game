@@ -1,18 +1,15 @@
-import time, threading, random
+import time, threading, random, csv
 
 def generateWord():
+	file = open('hard.csv')
+	reader = csv.reader(file)
+	wordsList = list(reader)
+	size = len(wordsList[0])
 
 	rand = random.Random()
-	num = rand.randint(1, 4)
-	
-	if num == 1: 
-		return 'word'
-	elif num == 2:
-		return 'hello'
-	elif num == 3:
-		return 'hi'
-	elif num == 4:
-		return 'python'
+	num = rand.randint(0, size - 1)
+
+	return wordsList[0][num]
 
 def summonWords():
 
@@ -29,7 +26,7 @@ def summonWords():
 		countTime()
 
 		words.append(generateWord())
-		times.append(5)
+		times.append(5) # num seconds duration for each word
 		print(words)
 		print(times)
 
@@ -59,10 +56,10 @@ def countTime(): # Another thread?
 			print('Game Over! Enter anything to end and see score: ')
 			
 
-
-# game
-def playGame():
-	# data
+def main():
+	#setup
+	print('Choose word difficulty: ')
+	print('Choose speed: ')
 	wordPoints = 100
 	
 	threadWords = threading.Thread(target = summonWords)
@@ -76,10 +73,9 @@ def playGame():
 
 words = []
 times = []
-
 gameState = True
 
-playGame()
+main()
 	
 
 
