@@ -1,1 +1,3 @@
 # type-speed-game
+
+A command-line typing game that tasks users to correctly type different words based on their own preferences for speed and word difficulty. During each set time interval, an additional word will appear. Each word will be active for a set amount of time, and when that time passes, the player loses and the game is over. The player must successfully type the words in sequence before any of the time limits pass, and gain points for each word completed. 
