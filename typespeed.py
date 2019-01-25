@@ -81,7 +81,7 @@ def main():
 	elif speed == 'Fast':
 		timeInterval = 2
 	elif speed == 'Lightning':
-		speed == 1
+		timeInterval == 1
 
 	wordPoints = 100
 	
